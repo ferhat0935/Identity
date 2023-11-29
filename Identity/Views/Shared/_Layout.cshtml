@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Identity App</title>
+    <link href="\node_modules\bootstrap\dist\css\bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+
+                @if (User != null && User.IsInRole("Admin"))  //Adminin göreceği yer
+                {
+                    <li class="nav-item" role="presentation">
+                        <a asp-action="Index" asp-controller="User" class="nav-link">Kullanıcılar</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a asp-action="Index" asp-controller="Role" class="nav-link">Role listesi</a>
+                    </li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item" role="presentation">
+                        <a asp-action="SignOut" asp-controller="Home" class="nav-link">Çıkış Yap</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item" role="presentation">
+                        <a asp-action="SignIn" asp-controller="Home" class="nav-link">Giriş Yap</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a asp-action="Create" asp-controller="Home" class="nav-link">Kayıt Ol</a>
+                    </li>
+                }
+               
+
+            </ul>
+        </div>
+    </header>
+    <section>
+        <div class="container mt-2">
+            @RenderBody()
+        </div>
+    </section>
+
+    <script src="\node_modules\bootstrap\dist\js\bootstrap.bundle.min.js"></script>
+</body>
+</html>
